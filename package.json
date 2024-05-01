@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun --watch --smol run ./src/index.ts",
-    "vercel-build": "ls && bun build --target=bun --outdir=api index.ts"
+    "vercel-build": "pwd && ls && bun build --target=bun --outdir=api ./src/*"
   },
   "devDependencies": {
     "@types/bun": "latest",
