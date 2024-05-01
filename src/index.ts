@@ -4,9 +4,10 @@ export const app: Express = express();
 app.use(express.json());
 
 const port = process.env.PORT || 8080;
+const isVercel = process.env.DEPLOYMENT_ENV === "vercel";
 
 app.get(
-  '/',
+  '/api',
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       res.status(200).json({
@@ -19,6 +20,10 @@ app.get(
   },
 );
 
-app.listen(port, () => {
-  console.log(`Server is up and running on port ${port}`);
-});
+if (!isVercel) {
+  app.listen(port, () => {
+    console.log(`Server is up and running on port ${port}`);
+  });
+}
+
+module.exports = app;
