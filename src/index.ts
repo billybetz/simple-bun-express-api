@@ -7,11 +7,25 @@ const port = process.env.PORT || 8080;
 const isVercel = process.env.DEPLOYMENT_ENV === "vercel";
 
 app.get(
-  '/api',
+  '/',
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       res.status(200).json({
-        message: 'Hurray!! we create our first server on bun js',
+        message: 'Hello from /',
+        success: true,
+      });
+    } catch (error: unknown) {
+      next(new Error((error as Error).message));
+    }
+  },
+);
+
+app.get(
+  '/api/v1',
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      res.status(200).json({
+        message: 'Hello from /api/v1',
         success: true,
       });
     } catch (error: unknown) {
@@ -26,4 +40,4 @@ if (!isVercel) {
   });
 }
 
-module.exports = app;
+export default app
